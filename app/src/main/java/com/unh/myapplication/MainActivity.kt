@@ -1,6 +1,7 @@
 package com.unh.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,6 +20,24 @@ class MainActivity : AppCompatActivity() {
         }
         binding.submitQuestion.setOnClickListener {
             binding.txtQuestion.text = ""
+
+            writeStudentToFirebase()
         }
+    }
+    private fun writeStudentToFirebase() {
+        val firstName = binding.txtFirstName.text
+        val lastName = binding.txtLastName.text
+        val prefName = binding.txtPrefName.text
+        val answer = binding.ansTxt.text
+
+        val tag = "Myapplication-Icetag"
+        val msg = "Variables: $firstName $lastName $prefName $answer"
+
+        Log.d(tag, msg)
+
+
+
+
+
     }
     }
