@@ -28,9 +28,8 @@ class MainActivity : AppCompatActivity() {
             binding.txtQuestion.text = randomQuestion
         }
         binding.submitQuestion.setOnClickListener {
-            binding.txtQuestion.text = ""
-
             writeStudentToFirebase()
+            binding.txtQuestion.text = ""
         }
     }
     private fun getQuestionsFromFirebase(){
@@ -49,20 +48,20 @@ class MainActivity : AppCompatActivity() {
             }
     }
     private fun writeStudentToFirebase() {
-        val firstName = binding.txtFirstName.text
-        val lastName = binding.txtLastName.text
-        val prefName = binding.txtPrefName.text
-        val answer = binding.ansTxt.text
+        val firstName = binding.txtFirstName
+        val lastName = binding.txtLastName
+        val prefName = binding.txtPrefName
+        val answer = binding.ansTxt
 
         val tag = "Myapplication-Icetag"
         val msg = "Variables: $firstName $lastName $prefName $answer"
 
         Log.d(tag, msg)
         val student = hashMapOf(
-            "firstname" to firstName.toString(),
-            "lastname" to lastName.toString(),
-            "prefname" to prefName.toString(),
-            "answer" to answer.toString(),
+            "firstname" to firstName.text.toString(),
+            "lastname" to lastName.text.toString(),
+            "prefname" to prefName.text.toString(),
+            "answer" to answer.text.toString(),
             "class" to className,
             "question" to binding.txtQuestion.text.toString()
         )
@@ -74,7 +73,11 @@ class MainActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error adding Document", exception)
             }
-
+        firstName.setText("")
+        lastName.setText("")
+        prefName.setText("")
+        answer.setText("")
+        binding.txtQuestion.text = ""
 
     }
     }
