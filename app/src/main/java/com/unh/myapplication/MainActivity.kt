@@ -15,14 +15,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val db = Firebase.firestore
     private var TAG = "Myapplication-Icetag"
+    private var questionBank: MutableList<Questions>? = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getQuestionsFromFirebase()
 
         binding.setRandomQuestion.setOnClickListener {
-            binding.txtQuestion.text = "Hello"
+            val randomQuestion = questionBank!!.random().text
+            binding.txtQuestion.text = randomQuestion
         }
         binding.submitQuestion.setOnClickListener {
             binding.txtQuestion.text = ""
